@@ -1,0 +1,39 @@
+
+Options -Multiviews
+RewriteEngine On
+RewriteBase /
+
+
+
+RewriteCond %{HTTP_HOST} ^www\.sweeba\.com$ [NC]
+RewriteRule ^(.*)$ https://sweeba.com/$1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/?(adm98)/
+RewriteRule ^([^/]+)/([^/]+)$ view_sweeb.php?id=$1&t=$2 [L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/?(adm98)/
+RewriteRule ^([^/]+)/?$ view_mem.php?id=$1 [L,QSA]
+
+
+Order Allow,Deny
+Deny from 15.204.48.216
+Deny from 46.174.156.3
+Deny from 135.148.66.145
+Deny from 104.250.238.104
+Deny from 104.248.157.31
+Deny from 138.199.59.143
+Deny from 107.179.114.39
+Deny from 64.124.8.72
+Deny from 89.35.52.
+Deny from 78.180.195.12
+Deny from 31.223.106.155
+Deny from 78.180.*.*
+Deny from 31.223.*.*
+Deny from 92.114.32.32
+Deny from 31.223.106.155
+Allow from all

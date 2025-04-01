@@ -1,0 +1,28 @@
+Options -Multiviews
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/?(adm98)/
+RewriteRule ^([^/]+)/([^/]+)$ view_sweeb.php?id=$1&t=$2 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/?(adm98)/
+RewriteRule ^([^/]+)/?$ view_mem.php?id=$1 [L,QSA]
+
+RewriteCond %{HTTP_HOST} !^(.*)\.sweeba\.com$ [NC]
+RewriteRule ^(.*)$ http://www.sweeba.com/$1 [R=301,L]
+
+ForceType application/octet-stream
+<FilesMatch "(?i)\.jpe?g$">
+    ForceType image/jpeg
+</FilesMatch>
+<FilesMatch "(?i)\.gif$">
+    ForceType image/gif
+</FilesMatch>
+<FilesMatch "(?i)\.png$">
+    ForceType image/png
+</FilesMatch>
+
