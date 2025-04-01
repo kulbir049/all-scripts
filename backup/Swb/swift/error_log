@@ -1,0 +1,32 @@
+[31-Mar-2015 18:22:10 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/sweebacom/public_html/swift/test.php on line 12
+[31-Mar-2015 18:25:28 UTC] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host smtp.sweeba.com [php_network_getaddresses: getaddrinfo failed: Name or service not known #0]' in /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php:265
+Stack trace:
+#0 /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/sweebacom/public_html/swift/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/sweebacom/public_html/swift/test.php(31): Swift_Mailer->send(Object(Swift_Message))
+#4 {main}
+  thrown in /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php on line 265
+[31-Mar-2015 18:25:50 UTC] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host smtp.sweeba.com [php_network_getaddresses: getaddrinfo failed: Name or service not known #0]' in /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php:265
+Stack trace:
+#0 /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/sweebacom/public_html/swift/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/sweebacom/public_html/swift/test.php(31): Swift_Mailer->send(Object(Swift_Message))
+#4 {main}
+  thrown in /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php on line 265
+[31-Mar-2015 18:25:51 UTC] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host smtp.sweeba.com [php_network_getaddresses: getaddrinfo failed: Name or service not known #0]' in /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php:265
+Stack trace:
+#0 /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/sweebacom/public_html/swift/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/sweebacom/public_html/swift/test.php(31): Swift_Mailer->send(Object(Swift_Message))
+#4 {main}
+  thrown in /home/sweebacom/public_html/swift/lib/classes/Swift/Transport/StreamBuffer.php on line 265
+[31-Mar-2015 18:34:53 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/sweebacom/public_html/swift/test.php on line 26
+[31-Mar-2015 18:35:08 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/sweebacom/public_html/swift/test.php on line 20
+[31-Mar-2015 18:36:50 UTC] PHP Parse error:  syntax error, unexpected '$message' (T_VARIABLE) in /home/sweebacom/public_html/swift/test.php on line 14
+[31-Mar-2015 18:37:47 UTC] PHP Parse error:  syntax error, unexpected '$result' (T_VARIABLE) in /home/sweebacom/public_html/swift/test.php on line 29
+[31-Mar-2015 18:38:02 UTC] PHP Fatal error:  Call to a member function embed() on a non-object in /home/sweebacom/public_html/swift/test.php on line 19
+[31-Mar-2015 18:38:20 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/sweebacom/public_html/swift/test.php on line 19
+[31-Mar-2015 18:38:55 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/sweebacom/public_html/swift/test.php on line 19
