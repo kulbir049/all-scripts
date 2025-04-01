@@ -1,0 +1,113 @@
+{
+    "id": "evt_1OnhgaSFYQB9X8iv8SuwBn2C",
+    "object": "event",
+    "api_version": "2023-10-16",
+    "created": 1708867448,
+    "data": {
+        "object": {
+            "id": "cs_test_a1AcD2gpkDNbVSTFv1d5FM7Jg1tCgFGhgsuf9nM0eXUmv3Lc02CM7FJXs1",
+            "object": "checkout.session",
+            "after_expiration": null,
+            "allow_promotion_codes": false,
+            "amount_subtotal": 10000,
+            "amount_total": 10000,
+            "automatic_tax": {
+                "enabled": false,
+                "liability": null,
+                "status": null
+            },
+            "billing_address_collection": "required",
+            "cancel_url": "https:\/\/stripe.com",
+            "client_reference_id": null,
+            "client_secret": null,
+            "consent": null,
+            "consent_collection": {
+                "payment_method_reuse_agreement": null,
+                "promotions": "none",
+                "terms_of_service": "none"
+            },
+            "created": 1708867226,
+            "currency": "inr",
+            "currency_conversion": null,
+            "custom_fields": [],
+            "custom_text": {
+                "after_submit": null,
+                "shipping_address": null,
+                "submit": null,
+                "terms_of_service_acceptance": null
+            },
+            "customer": null,
+            "customer_creation": "if_required",
+            "customer_details": {
+                "address": {
+                    "city": "Amritsar",
+                    "country": "IN",
+                    "line1": "Butari",
+                    "line2": "khalchian",
+                    "postal_code": "143111",
+                    "state": "PB"
+                },
+                "email": "kulbir@gmail.com",
+                "name": "kulbir singh",
+                "phone": null,
+                "tax_exempt": "none",
+                "tax_ids": []
+            },
+            "customer_email": null,
+            "expires_at": 1708953626,
+            "invoice": null,
+            "invoice_creation": {
+                "enabled": false,
+                "invoice_data": {
+                    "account_tax_ids": null,
+                    "custom_fields": null,
+                    "description": null,
+                    "footer": null,
+                    "issuer": null,
+                    "metadata": [],
+                    "rendering_options": null
+                }
+            },
+            "livemode": false,
+            "locale": "auto",
+            "metadata": [],
+            "mode": "payment",
+            "payment_intent": "pi_3OnhdZSFYQB9X8iv0alcI3eK",
+            "payment_link": "plink_1Onh6TSFYQB9X8ivj3LCSW6a",
+            "payment_method_collection": "if_required",
+            "payment_method_configuration_details": null,
+            "payment_method_options": [],
+            "payment_method_types": [
+                "card"
+            ],
+            "payment_status": "paid",
+            "phone_number_collection": {
+                "enabled": false
+            },
+            "recovered_from": null,
+            "setup_intent": null,
+            "shipping_address_collection": null,
+            "shipping_cost": null,
+            "shipping_details": null,
+            "shipping_options": [],
+            "status": "complete",
+            "submit_type": "auto",
+            "subscription": null,
+            "success_url": "https:\/\/stripe.com",
+            "total_details": {
+                "amount_discount": 0,
+                "amount_shipping": 0,
+                "amount_tax": 0
+            },
+            "ui_mode": "hosted",
+            "url": null
+        }
+    },
+    "livemode": false,
+    "pending_webhooks": 3,
+    "request": {
+        "id": null,
+        "idempotency_key": null
+    },
+    "type": "checkout.session.completed"
+}

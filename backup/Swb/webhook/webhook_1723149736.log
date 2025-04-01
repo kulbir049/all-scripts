@@ -1,0 +1,104 @@
+{
+    "id": "evt_1PldA2SFYQB9X8ivoaxkX4Vq",
+    "object": "event",
+    "api_version": "2023-10-16",
+    "created": 1723149734,
+    "data": {
+        "object": {
+            "id": "cs_test_a159g0f0cteVc0ZQ1HWOKmnJzx8Cp9Fedvy9iAclDNGWmoxK8Mz87obhQD",
+            "object": "checkout.session",
+            "after_expiration": null,
+            "allow_promotion_codes": false,
+            "amount_subtotal": 10000,
+            "amount_total": 10000,
+            "automatic_tax": {
+                "enabled": false,
+                "liability": null,
+                "status": null
+            },
+            "billing_address_collection": "required",
+            "cancel_url": "https:\/\/stripe.com",
+            "client_reference_id": null,
+            "client_secret": null,
+            "consent": null,
+            "consent_collection": {
+                "payment_method_reuse_agreement": null,
+                "promotions": "none",
+                "terms_of_service": "none"
+            },
+            "created": 1723063334,
+            "currency": "inr",
+            "currency_conversion": null,
+            "custom_fields": [],
+            "custom_text": {
+                "after_submit": null,
+                "shipping_address": null,
+                "submit": null,
+                "terms_of_service_acceptance": null
+            },
+            "customer": null,
+            "customer_creation": "if_required",
+            "customer_details": null,
+            "customer_email": null,
+            "expires_at": 1723149734,
+            "invoice": null,
+            "invoice_creation": {
+                "enabled": false,
+                "invoice_data": {
+                    "account_tax_ids": null,
+                    "custom_fields": null,
+                    "description": null,
+                    "footer": null,
+                    "issuer": null,
+                    "metadata": [],
+                    "rendering_options": null
+                }
+            },
+            "livemode": false,
+            "locale": "auto",
+            "metadata": [],
+            "mode": "payment",
+            "payment_intent": null,
+            "payment_link": "plink_1Onh6TSFYQB9X8ivj3LCSW6a",
+            "payment_method_collection": "if_required",
+            "payment_method_configuration_details": null,
+            "payment_method_options": {
+                "card": {
+                    "request_three_d_secure": "automatic"
+                }
+            },
+            "payment_method_types": [
+                "card"
+            ],
+            "payment_status": "unpaid",
+            "phone_number_collection": {
+                "enabled": false
+            },
+            "recovered_from": null,
+            "saved_payment_method_options": null,
+            "setup_intent": null,
+            "shipping_address_collection": null,
+            "shipping_cost": null,
+            "shipping_details": null,
+            "shipping_options": [],
+            "status": "expired",
+            "submit_type": "auto",
+            "subscription": null,
+            "success_url": "https:\/\/sweeba.com\/purchase_status.php",
+            "total_details": {
+                "amount_discount": 0,
+                "amount_shipping": 0,
+                "amount_tax": 0
+            },
+            "ui_mode": "hosted",
+            "url": null
+        }
+    },
+    "livemode": false,
+    "pending_webhooks": 1,
+    "request": {
+        "id": null,
+        "idempotency_key": null
+    },
+    "type": "checkout.session.expired"
+}
