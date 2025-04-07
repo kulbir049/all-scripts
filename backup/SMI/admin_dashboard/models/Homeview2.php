@@ -98,7 +98,7 @@ class Homeview2 extends CI_Model
     public function paid_members()
     {
         $this->db->select('*');
-        $this->db->where_in('role_id',[3,4]);
+        $this->db->where_in('role_id', [3, 4]);
         //$this->db->where('status','1');
         $this->db->from('user');
         $paid = $this->db->get()->result_array();
@@ -108,7 +108,7 @@ class Homeview2 extends CI_Model
     public function total_members()
     {
         $this->db->select('*');
-        $this->db->where_in('role_id',[4]);
+        $this->db->where_in('role_id', [4]);
         // $this->db->where('status','1');
         $this->db->from('user');
         $total = $this->db->get()->result_array();
@@ -119,7 +119,7 @@ class Homeview2 extends CI_Model
     public function total_members_file()
     {
         $this->db->select('*');
-        $this->db->where('delete_status','0');
+        $this->db->where('delete_status', '0');
         $this->db->from('category_image');
         $total_files = $this->db->get()->result_array();
         return $total_files;
@@ -128,7 +128,7 @@ class Homeview2 extends CI_Model
     public function total_number_folder()
     {
         $this->db->select('*');
-        $this->db->where('delete_status!=','2');
+        $this->db->where('delete_status!=', '2');
         $this->db->from('categories');
         $total_folder = $this->db->get()->result_array();
         return $total_folder;
@@ -141,8 +141,8 @@ class Homeview2 extends CI_Model
         $month = date('Y-m');
         //echo $month; die;
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("smp.plan_id",3);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 3);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -159,9 +159,9 @@ class Homeview2 extends CI_Model
     {
         $year = date('Y');
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
-        $this->db->join('user u','u.user_id=smp.user_id');
-        $this->db->where("smp.plan_id",4);
-        $this->db->where_in('u.role_id',[4]);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
+        $this->db->where_in('u.role_id', [4]);
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -177,8 +177,8 @@ class Homeview2 extends CI_Model
     {
         $year = date('Y');
         $this->db->where("DATE_FORMAT(o.created_on,'%Y') ", $year);
-        $this->db->where('payment_status','Success');
-        $this->db->join('user u','u.user_id=o.user_id');
+        $this->db->where('payment_status', 'Success');
+        $this->db->join('user u', 'u.user_id=o.user_id');
         $this->db->select('SUM(o.grand_total) as this_year_sales');
         $this->db->from('orders o');
 
@@ -191,26 +191,26 @@ class Homeview2 extends CI_Model
     public function this_year_jan_to_march()
     {
         $january = strtotime('now');
-        $jan = date('Y-7-1 00:00:00',$january);
-        $march = date('Y-9-t 12:59:59',$january);
+        $jan = date('Y-7-1 00:00:00', $january);
+        $march = date('Y-9-t 12:59:59', $january);
         $this->db->select('SUM(smp.price) as this_year_price');
-        $this->db->where('subscribe_date>=',$jan);
-        $this->db->where('subscribe_date<=',$march);
+        $this->db->where('subscribe_date>=', $jan);
+        $this->db->where('subscribe_date<=', $march);
         $this->db->from('subscribe_membership_plan smp');
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this_year_jan = $this->db->get()->result_array();
         //  echo $this->db->last_query();
         return $this_year_jan;
     }
 
-    public function get_year_QUARTER($year,$QUARTER_id)
+    public function get_year_QUARTER($year, $QUARTER_id)
     {
 
         $this->db->where("YEAR(subscribe_date)", $year);
         //$this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y')",$year);
         $this->db->where("QUARTER(subscribe_date)", $QUARTER_id);
-        $this->db->where("smp.plan_id",3);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 3);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -223,17 +223,17 @@ class Homeview2 extends CI_Model
         return $this_year_data;
     }
 
-    public function get_last_year_QUARTER($last_year,$QUARTER_id)
+    public function get_last_year_QUARTER($last_year, $QUARTER_id)
     {
 
         $this->db->where("YEAR(subscribe_date)", $last_year);
         $this->db->where("QUARTER(subscribe_date)", $QUARTER_id);
-        $this->db->where('smp.plan_id',3);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where('smp.plan_id', 3);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
-//echo "<br/>";
+        //echo "<br/>";
         $last_year_data = $this->db->get()->result();
         // if($QUARTER_id==1){
         //     echo $this->db->last_query();
@@ -241,21 +241,21 @@ class Homeview2 extends CI_Model
         // }
         return $last_year_data;
     }
-    public function last_year_record($previous='')
+    public function last_year_record($previous = '')
     {
         $year = date('Y');
-        $last_year = $year -1;
+        $last_year = $year - 1;
 
 
         //$this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $last_year);
-        if($previous=='previous'){
+        if ($previous == 'previous') {
             $this->db->where("YEAR(subscribe_date) <", $last_year);
-        }else{
+        } else {
             $this->db->where("YEAR(subscribe_date)", $last_year);
         }
         $this->db->where("smp.plan_id", 4);
-        $this->db->where_in('u.role_id',[4]);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where_in('u.role_id', [4]);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -270,8 +270,8 @@ class Homeview2 extends CI_Model
         $month = date('Y-m');
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("smp.plan_id",4);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -280,7 +280,7 @@ class Homeview2 extends CI_Model
 
         // echo $this->db->last_query();
 
-        return ['amount'=>get_sum_amount($records_month)];
+        return ['amount' => get_sum_amount($records_month)];
     }
 
     public function get_month_userRecord()
@@ -289,9 +289,9 @@ class Homeview2 extends CI_Model
         $month = date('Y-m');
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("u.role_id",4);
-        $this->db->where("smp.no_renewal_monthly <=",1);
-        $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
+        $this->db->where("u.role_id", 4);
+        $this->db->where("smp.no_renewal_monthly <=", 1);
+        $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('user u');
         $records_month = $this->db->get()->result();
@@ -300,9 +300,9 @@ class Homeview2 extends CI_Model
 
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("u.role_id",4);
-        $this->db->where("smp.price >",0);
-        $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
+        $this->db->where("u.role_id", 4);
+        $this->db->where("smp.price >", 0);
+        $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('user u');
         $this->db->group_by('u.user_id');
@@ -313,9 +313,9 @@ class Homeview2 extends CI_Model
         //renew
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("u.role_id",4);
-        $this->db->where("smp.no_renewal_monthly >",1);
-        $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
+        $this->db->where("u.role_id", 4);
+        $this->db->where("smp.no_renewal_monthly >", 1);
+        $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('user u');
         $records_renew_month = $this->db->get()->result();
@@ -323,44 +323,43 @@ class Homeview2 extends CI_Model
         //monthly renew
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("u.role_id",4);
-        $this->db->where("smp.no_renewal>",0);
-        $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
+        $this->db->where("u.role_id", 4);
+        $this->db->where("smp.no_renewal>", 0);
+        $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('user u');
         $records_mrenew_month = $this->db->get()->result();
         //   echo $this->db->last_query();
         //   echo "<br/>";
 
-        return ['new'=>count($records_month),'paid'=>count($records_paid),"renew"=>count($records_renew_month),"mrenew"=>count($records_mrenew_month)];
+        return ['new' => count($records_month), 'paid' => count($records_paid), "renew" => count($records_renew_month), "mrenew" => count($records_mrenew_month)];
     }
     public function year_finanace_C4($year_id)
     {
-        $year=0;
-        $last_year=0;
-        $before_last_year=0;
-        if($year_id==2){
+        $year = 0;
+        $last_year = 0;
+        $before_last_year = 0;
+        if ($year_id == 2) {
             $year = date('Y');
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
-        }elseif($year_id==1){
-            $last_year = date('Y')-1;
+        } elseif ($year_id == 1) {
+            $last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $last_year);
-        }elseif($year_id== -1){
-            $before_last_year1 = date('Y')-2;
+        } elseif ($year_id == -1) {
+            $before_last_year1 = date('Y') - 2;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year1);
-        }elseif($year_id== -2){
-            $before_last_year2 = date('Y')-3;
+        } elseif ($year_id == -2) {
+            $before_last_year2 = date('Y') - 3;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year2);
-        }
-        else{
-            $before_last_year = date('Y')-1;
+        } else {
+            $before_last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') <", $before_last_year);
         }
 
 
 
-        $this->db->join('user u','u.user_id=smp.user_id');
-        $this->db->where("smp.plan_id",4);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         //$this->db->group_by('smp.user_id');
@@ -373,127 +372,121 @@ class Homeview2 extends CI_Model
 
 
 
-        if($year_id==2){
+        if ($year_id == 2) {
             $year = date('Y');
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
-        }elseif($year_id==1){
-            $last_year = date('Y')-1;
+        } elseif ($year_id == 1) {
+            $last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $last_year);
-        }elseif($year_id== -1){
-            $before_last_year1 = date('Y')-2;
+        } elseif ($year_id == -1) {
+            $before_last_year1 = date('Y') - 2;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year1);
-        }elseif($year_id== -2){
-            $before_last_year2 = date('Y')-3;
+        } elseif ($year_id == -2) {
+            $before_last_year2 = date('Y') - 3;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year2);
-        }
-
-        else{
-            $before_last_year = date('Y')-1;
+        } else {
+            $before_last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') <", $before_last_year);
         }
 
-        $this->db->where("smp.price >",0);
-        $this->db->where("smp.plan_id",4);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.price >", 0);
+        $this->db->where("smp.plan_id", 4);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         // $this->db->group_by('smp.user_id');
         $records_paid = $this->db->get()->result();
         //   echo $this->db->last_query();
         //   echo "<br/>";
-//renew
+        //renew
 
-        if($year_id==2){
+        if ($year_id == 2) {
             $year = date('Y');
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
-        }elseif($year_id==1){
-            $last_year = date('Y')-1;
+        } elseif ($year_id == 1) {
+            $last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $last_year);
-        }elseif($year_id== -1){
-            $before_last_year1 = date('Y')-2;
+        } elseif ($year_id == -1) {
+            $before_last_year1 = date('Y') - 2;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year1);
-        }elseif($year_id== -2){
-            $before_last_year2 = date('Y')-3;
+        } elseif ($year_id == -2) {
+            $before_last_year2 = date('Y') - 3;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year2);
-        }
-
-        else{
-            $before_last_year = date('Y')-1;
+        } else {
+            $before_last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') <", $before_last_year);
         }
 
-        $this->db->where("smp.price >",0);
-        $this->db->where("smp.plan_id",4);
-        $this->db->where("smp.no_renewal_monthly >",1);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.price >", 0);
+        $this->db->where("smp.plan_id", 4);
+        $this->db->where("smp.no_renewal_monthly >", 1);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         // $this->db->group_by('smp.user_id');
         $records_renew = $this->db->get()->result();
 
-//mrenew
+        //mrenew
 
-        if($year_id==2){
+        if ($year_id == 2) {
             $year = date('Y');
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
-        }elseif($year_id==1){
-            $last_year = date('Y')-1;
+        } elseif ($year_id == 1) {
+            $last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $last_year);
-        }elseif($year_id== -1){
-            $before_last_year1 = date('Y')-2;
+        } elseif ($year_id == -1) {
+            $before_last_year1 = date('Y') - 2;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year1);
-        }elseif($year_id== -2){
-            $before_last_year2 = date('Y')-3;
+        } elseif ($year_id == -2) {
+            $before_last_year2 = date('Y') - 3;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year2);
-        }
-
-        else{
-            $before_last_year = date('Y')-1;
+        } else {
+            $before_last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') <", $before_last_year);
         }
 
-        $this->db->where("smp.price >",0);
-        $this->db->where("smp.plan_id",4);
-        $this->db->where("smp.no_renewal >",0);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.price >", 0);
+        $this->db->where("smp.plan_id", 4);
+        $this->db->where("smp.no_renewal >", 0);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         // $this->db->group_by('smp.user_id');
         $records_mrenew = $this->db->get()->result();
 
 
-        if($year_id==2){
+        if ($year_id == 2) {
             $year = date('Y');
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
-        }elseif($year_id==1){
-            $last_year = date('Y')-1;
+        } elseif ($year_id == 1) {
+            $last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $last_year);
-        }elseif($year_id== -1){
-            $before_last_year1 = date('Y')-2;
+        } elseif ($year_id == -1) {
+            $before_last_year1 = date('Y') - 2;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year1);
-        }elseif($year_id== -2){
-            $before_last_year2 = date('Y')-3;
+        } elseif ($year_id == -2) {
+            $before_last_year2 = date('Y') - 3;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $before_last_year2);
-        }else{
-            $before_last_year = date('Y')-1;
+        } else {
+            $before_last_year = date('Y') - 1;
             $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') <", $before_last_year);
         }
 
-        $this->db->where_in("u.role_id",[4]);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where_in("u.role_id", [4]);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         //$this->db->group_by('smp.user_id');
         $records_total = $this->db->get()->result();
 
-        return ['new'=>count($records_month),'paid'=>count($records_paid),'renew'=>count($records_renew),'mrenew'=>count($records_mrenew),'total'=>count($records_total)];
+        return ['new' => count($records_month), 'paid' => count($records_paid), 'renew' => count($records_renew), 'mrenew' => count($records_mrenew), 'total' => count($records_total)];
     }
 
-    public function get_user_bymonth($type, $userType='',$new_paid='')
+    public function get_user_bymonth($type, $userType = '', $new_paid = '')
     {
-        if($type=='thisMonth'){
+        if ($type == 'thisMonth') {
             $month = date('Y-m');
-        }else{
+        } else {
             $month = date('Y-m', strtotime('last month'));
         }
 
@@ -503,17 +496,17 @@ class Homeview2 extends CI_Model
         //   }else{
         //   $this->db->where('u.role_id >', 0);
         //   }
-        $this->db->where("smp.plan_id",4);
-        if($new_paid==0 || $new_paid==1){
-            if($new_paid==1){
-                $this->db->where("smp.price >",0);
-                $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
-            }elseif($new_paid==0){
+        $this->db->where("smp.plan_id", 4);
+        if ($new_paid == 0 || $new_paid == 1) {
+            if ($new_paid == 1) {
+                $this->db->where("smp.price >", 0);
+                $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
+            } elseif ($new_paid == 0) {
                 //$this->db->where("smp.price >",0);
-                $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
+                $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
             }
-        }else{
-            $this->db->join('subscribe_membership_plan smp','u.user_id=smp.user_id');
+        } else {
+            $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
         }
         $this->db->select('u.*');
         $this->db->from('user u');
@@ -529,17 +522,88 @@ class Homeview2 extends CI_Model
         return count($records_month);
     }
 
-    public function get_year_month_record($year,$month)
+    public function get_membership_userData($monthType = null, $type = null, $new = null, $new_paid = null)
+    {
+        if ($monthType == 'thisMonth') {
+            $month = date('Y-m');
+        }
+        if ($monthType == 'lastMonth') {
+            $month = date('Y-m', strtotime('first day of -1 month'));
+        }
+        if ($monthType == 'thisYear') {
+            $year = date('Y');
+        }
+        if ($monthType == 'lastYear') {
+            $year = date('Y')-1;
+        }
+
+        if (isset($month)) {
+            $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
+        }
+        if (isset($year)) {
+            $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y') ", $year);
+        }
+        //   if($userType=='paid'){
+        //   $this->db->where('u.role_id', 3);
+        //   }else{
+        //   $this->db->where('u.role_id >', 0);
+        //   }
+        if ($type == 'Premium') {
+            $this->db->where("smp.plan_id", 3);
+            if ($new == 1) {
+                $this->db->where("smp.no_renewal >", 0);
+            }
+        }
+        if ($type == 'Standard') {
+            $this->db->where("smp.plan_id <=", 2);
+            // if ($new == 1) {
+            //     $this->db->where("smp.no_renewal >", 1);
+            // }
+        }
+        if ($type == 'Monthly') {
+            $this->db->where("smp.plan_id", 4);
+            if ($new == 1) {
+                $this->db->where("smp.no_renewal_monthly", 0);
+            }
+        }
+
+        if ($new_paid == 0 || $new_paid == 1) {
+            if ($new_paid == 1) {
+                $this->db->where("smp.price >", 0);
+                $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
+            } elseif ($new_paid == 0) {
+                //$this->db->where("smp.price >",0);
+                $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
+            }
+        } else {
+            $this->db->join('subscribe_membership_plan smp', 'u.user_id=smp.user_id');
+        }
+        $this->db->select('u.*');
+        $this->db->from('user u');
+        $this->db->group_by('smp.user_id');
+
+        $records_month = $this->db->get()->result();
+
+        // if ($monthType == 'thisMonth' && $type == 'Monthly') {
+        //     echo $this->db->last_query();
+        //     die;
+        // }
+
+        return count($records_month);
+    }
+
+
+    public function get_year_month_record($year, $month)
     {
 
-        if($month<10){
-            $month='0'.$month;
+        if ($month < 10) {
+            $month = '0' . $month;
         }
-        $month = $year.'-'.$month;
+        $month = $year . '-' . $month;
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("smp.plan_id",4);
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('SUM(smp.price) as price');
         $this->db->from('subscribe_membership_plan smp');
         //$this->db->group_by('smp.user_id');
@@ -549,10 +613,10 @@ class Homeview2 extends CI_Model
 
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->join('user u','u.user_id=smp.user_id');
-        $this->db->where("smp.plan_id",4);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
         $this->db->select('u.*');
-        $this->db->where("smp.no_renewal_monthly <=",1);
+        $this->db->where("smp.no_renewal_monthly <=", 1);
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
         $records_month = $this->db->get()->result();
@@ -563,10 +627,10 @@ class Homeview2 extends CI_Model
 
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("smp.price >",0);
-        $this->db->where("smp.plan_id",4);
+        $this->db->where("smp.price >", 0);
+        $this->db->where("smp.plan_id", 4);
 
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -574,9 +638,9 @@ class Homeview2 extends CI_Model
 
         //renew
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->join('user u','u.user_id=smp.user_id');
-        $this->db->where("smp.plan_id",4);
-        $this->db->where("smp.no_renewal_monthly >",1);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
+        $this->db->where("smp.no_renewal_monthly >", 1);
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -584,9 +648,9 @@ class Homeview2 extends CI_Model
 
         //mrenew
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->join('user u','u.user_id=smp.user_id');
-        $this->db->where("smp.plan_id",4);
-        $this->db->where("smp.no_renewal >",0);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
+        $this->db->where("smp.plan_id", 4);
+        $this->db->where("smp.no_renewal >", 0);
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -595,16 +659,16 @@ class Homeview2 extends CI_Model
         //   if($month=='2024-05'){
         //    echo $this->db->last_query();
         //  }
-        return ['amount'=>get_sum_amount($amount_records_month),'new'=>count($records_month),'paid'=>count($records_paid),"renew"=>count($records_renew_month),"mrenew"=>count($records_mrenew_month)];
+        return ['amount' => get_sum_amount($amount_records_month), 'new' => count($records_month), 'paid' => count($records_paid), "renew" => count($records_renew_month), "mrenew" => count($records_mrenew_month)];
     }
 
-    public function get_year_month_userRecord($year,$month)
+    public function get_year_month_userRecord($year, $month)
     {
 
-        if($month<10){
-            $month='0'.$month;
+        if ($month < 10) {
+            $month = '0' . $month;
         }
-        $month = $year.'-'.$month;
+        $month = $year . '-' . $month;
 
         //   $this->db->where("DATE_FORMAT(created_on,'%Y-%m') ", $month);
         //   $this->db->where("role_id",3);
@@ -612,8 +676,8 @@ class Homeview2 extends CI_Model
         //  $this->db->from('user');
 
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->join('user u','u.user_id=smp.user_id');
-        $this->db->where("u.role_id",3);
+        $this->db->join('user u', 'u.user_id=smp.user_id');
+        $this->db->where("u.role_id", 3);
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -631,10 +695,10 @@ class Homeview2 extends CI_Model
         // $this->db->from('user u');
         // $this->db->group_by('u.user_id');
         $this->db->where("DATE_FORMAT(smp.subscribe_date,'%Y-%m') ", $month);
-        $this->db->where("smp.price >",0);
-        $this->db->where("u.role_id",3);
+        $this->db->where("smp.price >", 0);
+        $this->db->where("u.role_id", 3);
 
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $this->db->select('u.*');
         $this->db->from('subscribe_membership_plan smp');
         $this->db->group_by('smp.user_id');
@@ -645,7 +709,7 @@ class Homeview2 extends CI_Model
         //    echo "<br/>";
         // }
 
-        return ['new'=>count($records_month),'paid'=>count($records_paid)];
+        return ['new' => count($records_month), 'paid' => count($records_paid)];
     }
 
     //  public function this_year_april_to_june()
@@ -741,10 +805,10 @@ class Homeview2 extends CI_Model
 
         //$this->db->where('subscribe_date>=',$julyy);
         //  $this->db->where('subscribe_date<=',$sept);
-        $this->db->where('u.last_login>=',$julyy);
-        $this->db->where('u.last_login<=',$sept);
+        $this->db->where('u.last_login>=', $julyy);
+        $this->db->where('u.last_login<=', $sept);
         $this->db->from('subscribe_membership_plan smp');
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $last_year_july = $this->db->get()->result_array();
         return $last_year_july;
     }
@@ -752,16 +816,16 @@ class Homeview2 extends CI_Model
     public function last_previous_yearlogin()
     {
         $july = strtotime('-1 Year');
-        $julyy = date('Y-1-1 00:00:00',$july);
-        $sept = date('Y-m-d 12:59:59',$july);
+        $julyy = date('Y-1-1 00:00:00', $july);
+        $sept = date('Y-m-d 12:59:59', $july);
         $this->db->select('smp.*');
 
         //$this->db->where('subscribe_date>=',$julyy);
         //  $this->db->where('subscribe_date<=',$sept);
-        $this->db->where('u.last_login>=',$julyy);
-        $this->db->where('u.last_login<=',$sept);
+        $this->db->where('u.last_login>=', $julyy);
+        $this->db->where('u.last_login<=', $sept);
         $this->db->from('subscribe_membership_plan smp');
-        $this->db->join('user u','u.user_id=smp.user_id');
+        $this->db->join('user u', 'u.user_id=smp.user_id');
         $last_year_july = $this->db->get()->result_array();
         return $last_year_july;
     }
@@ -798,5 +862,3 @@ class Homeview2 extends CI_Model
     // }
 
 }
-
-?>

@@ -17,7 +17,7 @@ class Admin_dashboard extends MY_Controller {
 
 
 
-        $data['limit_days']=ACCOUNT_EXPIRE_DAYS;
+       /* $data['limit_days']=ACCOUNT_EXPIRE_DAYS;
        $since_date=date('Y-m-d',strtotime("-".$data['limit_days']." days"));
         $data['user_list']=$this->Usermodal->get_unlogin_account($since_date);
         $data['limit_days']=2*ACCOUNT_EXPIRE_DAYS;
@@ -34,8 +34,7 @@ class Admin_dashboard extends MY_Controller {
          $data['paid'] = $this->Homeview->paid_members();
          $data['total'] = $this->Homeview->total_members();
          $data['total_mem'] = $this->Homeview->total_members_mebership();
-        $data['total_files'] = $this->Homeview->total_members_file();
-        $data['total_folder'] = $this->Homeview->total_number_folder();
+        
 
         $data['current_month'] = get_sum_amount($this->Homeview->current_month_record());
      //   echo '<pre>',print_r($data['current_month']),'</pre>'; die;
@@ -48,19 +47,11 @@ class Admin_dashboard extends MY_Controller {
         $data['this_year_sales'] = $this->Homeview->this_year_sales();
 
 
-        $year = date('Y');
-        $last_year = $year -1;
+        
 
-        $data['this_year_jan'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,1));
-        $data['this_year_april'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,2));
-        //$data['this_year_july'] = $this->Homeview->this_year_jan_to_march();
-        $data['this_year_july'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,3));
-        $data['this_year_oct'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,4));
+       
 //print_r($data['this_year_july']);
-        $data['last_year_jan'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,1));
-        $data['last_year_april'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,2));
-        $data['last_year_july'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,3));
-        $data['last_year_oct'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,4));
+        
 
         // dd($data['last_year_jan']);
         // dd($data['last_year_april']);
@@ -72,35 +63,11 @@ class Admin_dashboard extends MY_Controller {
         $data['total_member'] = $this->Homeview->getTotalMemberCount();
         $data['title'] = 'Sheet Music International';
      //   dd($data); die();
-        $data['new_dahsboard']['current_p']=$this->Homeview->get_month_userRecord();
-        $data['new_dahsboard']['jan_p']=$this->Homeview->get_year_month_record($year,1);
-        $data['new_dahsboard']['feb_p']=$this->Homeview->get_year_month_record($year,2);
-        $data['new_dahsboard']['mar_p']=$this->Homeview->get_year_month_record($year,3);
-        $data['new_dahsboard']['apr_p']=$this->Homeview->get_year_month_record($year,4);
-        $data['new_dahsboard']['may_p']=$this->Homeview->get_year_month_record($year,5);
-        $data['new_dahsboard']['jun_p']=$this->Homeview->get_year_month_record($year,6);
-        $data['new_dahsboard']['jul_p']=$this->Homeview->get_year_month_record($year,7);
-        $data['new_dahsboard']['aug_p']=$this->Homeview->get_year_month_record($year,8);
-        $data['new_dahsboard']['sep_p']=$this->Homeview->get_year_month_record($year,9);
-        $data['new_dahsboard']['oct_p']=$this->Homeview->get_year_month_record($year,10);
-        $data['new_dahsboard']['nov_p']=$this->Homeview->get_year_month_record($year,11);
-        $data['new_dahsboard']['dec_p']=$this->Homeview->get_year_month_record($year,12);
+        
 
 //dd($data['new_dahsboard']['may_p']);die;
 
-        $data['new_dahsboard']['current']=$this->Homeview->get_month_record();
-        $data['new_dahsboard']['jan']=$this->Homeview->get_year_month_record($last_year,1);
-        $data['new_dahsboard']['feb']=$this->Homeview->get_year_month_record($last_year,2);
-        $data['new_dahsboard']['mar']=$this->Homeview->get_year_month_record($last_year,3);
-        $data['new_dahsboard']['apr']=$this->Homeview->get_year_month_record($last_year,4);
-        $data['new_dahsboard']['may']=$this->Homeview->get_year_month_record($last_year,5);
-        $data['new_dahsboard']['jun']=$this->Homeview->get_year_month_record($last_year,6);
-        $data['new_dahsboard']['jul']=$this->Homeview->get_year_month_record($last_year,7);
-        $data['new_dahsboard']['aug']=$this->Homeview->get_year_month_record($last_year,8);
-        $data['new_dahsboard']['sep']=$this->Homeview->get_year_month_record($last_year,9);
-        $data['new_dahsboard']['oct']=$this->Homeview->get_year_month_record($last_year,10);
-        $data['new_dahsboard']['nov']=$this->Homeview->get_year_month_record($last_year,11);
-        $data['new_dahsboard']['dec']=$this->Homeview->get_year_month_record($last_year,12);
+        $
 
 
 
@@ -109,7 +76,7 @@ class Admin_dashboard extends MY_Controller {
         $data['new_dahsboard']['year_before']=$this->Homeview->year_finanace_C4(0);
         $data['new_dahsboard']['year_previous2']=$this->Homeview->year_finanace_C4(-1);
         $data['new_dahsboard']['year_previous3']=$this->Homeview->year_finanace_C4(-2);
-//**********************Monthly report **************************************************//
+
         $data['totalm'] = $this->Homeview2->total_members();
 
         $data['last_yearm'] = get_sum_amount($this->Homeview2->last_year_record());
@@ -156,11 +123,10 @@ class Admin_dashboard extends MY_Controller {
         $data['new_dahsboardm']['year_previous2']=$this->Homeview2->year_finanace_C4(-1);
         $data['new_dahsboardm']['year_previous3']=$this->Homeview2->year_finanace_C4(-2);
 
-        //*************************end monthly report*************************************//
-//dd($data['new_dahsboard']['dec_p']);
+
+        //dd($data['new_dahsboard']['dec_p']);
 //one year before login
-        $data['new_dahsboard']['currentyearlogin']=$this->Homeview->currentyarlogin();
-        $data['new_dahsboard']['previousyearlogin']=$this->Homeview->last_previous_yearlogin();
+        
         //end
 
         $data['new_dahsboard']['user_thisMonth']=$this->Homeview->get_user_bymonth('thisMonth');
@@ -172,11 +138,74 @@ class Admin_dashboard extends MY_Controller {
         $data['new_dahsboardm']['paid_user_thisMonth']=$this->Homeview2->get_user_bymonth('thisMonth','paid',1);
         $data['new_dahsboardm']['new_paid_user_thisMonth']=$this->Homeview2->get_user_bymonth('thisMonth','paid',0);
         $data['new_dahsboardm']['user_thisMonth']=$this->Homeview2->get_user_bymonth('thisMonth');
-        $data['new_dahsboardm']['user_lastMonth']=$this->Homeview2->get_user_bymonth('lastMonth');
+        $data['new_dahsboardm']['user_lastMonth']=$this->Homeview2->get_user_bymonth('lastMonth');*/
  
+        $year = date('Y');
+        $last_year = $year -1;
+       // Membership Data
+       $current_year_total=$this->Homeview2->get_membership_userData('thisYear');
+       $data['membership']['current_Month']['Members']=$current_year_total;
+       $data['membership']['current_Month']['Premium_Members']=$this->Homeview2->get_membership_userData('thisYear','Premium');
+       $data['membership']['current_Month']['Standard_Members']=$this->Homeview2->get_membership_userData('thisYear','Standard');
+       $data['membership']['current_Month']['New_Monthly']=$this->Homeview2->get_membership_userData('thisYear','Monthly');
+       $data['membership']['current_Month']['New_Premium_Members']=$this->Homeview2->get_membership_userData('thisMonth','Premium',1,1);;
+       $data['membership']['current_Month']['New_Standard_Members']=$this->Homeview2->get_membership_userData('thisMonth','Standard',1);;
+       $data['membership']['current_Month']['New_Monthly_Members']=$this->Homeview2->get_membership_userData('thisMonth','Monthly',1,1);
+
+       $last_year_total=$this->Homeview2->get_membership_userData('lastYear');
+       $data['membership']['last_Month']['Members']=$last_year_total;
+       $data['membership']['last_Month']['Premium_Members']=$this->Homeview2->get_membership_userData('lastYear','Premium');
+       $data['membership']['last_Month']['Standard_Members']=$this->Homeview2->get_membership_userData('lastYear','Standard');
+       $data['membership']['last_Month']['New_Monthly']=$this->Homeview2->get_membership_userData('lastYear','Monthly');
+       $data['membership']['last_Month']['New_Premium_Members']=$this->Homeview2->get_membership_userData('lastMonth','Premium',1,1);
+       $data['membership']['last_Month']['New_Standard_Members']=$this->Homeview2->get_membership_userData('lastMonth','Standard',1);
+       $data['membership']['last_Month']['New_Monthly_Members']=$this->Homeview2->get_membership_userData('lastMonth','Monthly',1,1);
+
+        $data['total_files'] = $this->Homeview->total_members_file();
+        $data['total_folder'] = $this->Homeview->total_number_folder();
+        $data['new_dahsboard']['currentyearlogin']=$this->Homeview->currentyarlogin();
+        $data['new_dahsboard']['previousyearlogin']=$this->Homeview->last_previous_yearlogin();
+
+       // this year Quatly data
+        $data['this_year_jan'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,1));
+        $data['this_year_april'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,2));
+        $data['this_year_july'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,3));
+        $data['this_year_oct'] = get_sum_amount($this->Homeview->get_year_QUARTER($year,4));
+        // last year Quatly data
+        $data['last_year_jan'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,1));
+        $data['last_year_april'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,2));
+        $data['last_year_july'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,3));
+        $data['last_year_oct'] = get_sum_amount($this->Homeview->get_last_year_QUARTER($last_year,4));
+         // finance last year data
+        $data['new_dahsboard']['current']=$this->Homeview->get_month_record();
+        $data['new_dahsboard']['jan']=$this->Homeview->get_year_month_record($last_year,1);
+        $data['new_dahsboard']['feb']=$this->Homeview->get_year_month_record($last_year,2);
+        $data['new_dahsboard']['mar']=$this->Homeview->get_year_month_record($last_year,3);
+        $data['new_dahsboard']['apr']=$this->Homeview->get_year_month_record($last_year,4);
+        $data['new_dahsboard']['may']=$this->Homeview->get_year_month_record($last_year,5);
+        $data['new_dahsboard']['jun']=$this->Homeview->get_year_month_record($last_year,6);
+        $data['new_dahsboard']['jul']=$this->Homeview->get_year_month_record($last_year,7);
+        $data['new_dahsboard']['aug']=$this->Homeview->get_year_month_record($last_year,8);
+        $data['new_dahsboard']['sep']=$this->Homeview->get_year_month_record($last_year,9);
+        $data['new_dahsboard']['oct']=$this->Homeview->get_year_month_record($last_year,10);
+        $data['new_dahsboard']['nov']=$this->Homeview->get_year_month_record($last_year,11);
+        $data['new_dahsboard']['dec']=$this->Homeview->get_year_month_record($last_year,12);
 
 
-
+       // finance  this year data
+        $data['new_dahsboard']['current_p']=$this->Homeview->get_month_userRecord();
+        $data['new_dahsboard']['jan_p']=$this->Homeview->get_year_month_record($year,1);
+        $data['new_dahsboard']['feb_p']=$this->Homeview->get_year_month_record($year,2);
+        $data['new_dahsboard']['mar_p']=$this->Homeview->get_year_month_record($year,3);
+        $data['new_dahsboard']['apr_p']=$this->Homeview->get_year_month_record($year,4);
+        $data['new_dahsboard']['may_p']=$this->Homeview->get_year_month_record($year,5);
+        $data['new_dahsboard']['jun_p']=$this->Homeview->get_year_month_record($year,6);
+        $data['new_dahsboard']['jul_p']=$this->Homeview->get_year_month_record($year,7);
+        $data['new_dahsboard']['aug_p']=$this->Homeview->get_year_month_record($year,8);
+        $data['new_dahsboard']['sep_p']=$this->Homeview->get_year_month_record($year,9);
+        $data['new_dahsboard']['oct_p']=$this->Homeview->get_year_month_record($year,10);
+        $data['new_dahsboard']['nov_p']=$this->Homeview->get_year_month_record($year,11);
+        $data['new_dahsboard']['dec_p']=$this->Homeview->get_year_month_record($year,12);
 
         _adminLayout('dashboard', $data);        
     }
