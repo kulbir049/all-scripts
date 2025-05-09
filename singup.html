@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup - Rasoi Software Infotech</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .signup-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .logo img {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #0e918c;
+            margin-bottom: 10px;
+        }
+
+        .user-type button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: 1px solid #0e918c;
+            background: white;
+            color: #0e918c;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .user-type button.active {
+            background: #0e918c;
+            color: white;
+        }
+
+        .form-group {
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background: #0e918c;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #0e918c;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <div class="logo">
+            <img src="rsi_logo.png" alt="Rasoi Logo">
+        </div>
+
+        <h2>Get Started</h2>
+        <p>It's free to signup and only takes a minute.</p>
+
+        <div class="user-type">
+            <button id="companyBtn" class="active" onclick="setUserType('company')">Company</button>
+            <button id="employeeBtn" onclick="setUserType('employee')">Employee</button>
+        </div>
+
+        <form id="signupForm">
+            <input type="hidden" id="userType" value="company">
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-group company-only">
+                <label>Company Name</label>
+                <input type="text" placeholder="Company Name">
+            </div>
+
+            <div class="form-group company-only">
+                <label>Company Website</label>
+                <input type="url" placeholder="https://example.com">
+            </div>
+
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+
+        <div class="footer">
+            Already have an account? <a href="#">Login</a>
+        </div>
+    </div>
+
+    <script>
+        function setUserType(type) {
+            document.getElementById('userType').value = type;
+
+            const isCompany = type === 'company';
+            document.querySelectorAll('.company-only').forEach(el => {
+                el.style.display = isCompany ? 'block' : 'none';
+            });
+
+            document.getElementById('companyBtn').classList.toggle('active', isCompany);
+            document.getElementById('employeeBtn').classList.toggle('active', !isCompany);
+        }
+
+        // Set initial state
+        setUserType('company');
+    </script>
+
+</body>
+
+</html>
