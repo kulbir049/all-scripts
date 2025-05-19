@@ -79,7 +79,17 @@ if (!in_array($parent_id, $_SESSION['destination_ids'])) {
 } else {
   $destination_ids_json = json_encode($_SESSION['destination_ids']);
 }
- ?>
+
+$this->db->select('*');
+$this->db->from('categories');
+$this->db->order_by("name", "asc");
+$this->db->where('parent_id', 14155);
+$this->db->where('delete_status!=', 2);
+$parent = $this->db->get();
+$music_apprval = $parent->result();
+//dd($music_apprval);
+
+?>
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <?php echo $breadcrumb; ?>
@@ -188,7 +198,15 @@ if (!in_array($parent_id, $_SESSION['destination_ids'])) {
 
           <a href="<?php echo site_url(); ?>admin_categories/admin_music_sale" <?php if ($parent_id == 13763) { ?>style="background-color: #666666; color: #fff;" <?php } ?>>Music for Sale</a>
 
-          <a href="<?php echo site_url(); ?>admin_categories/admin_s_d" <?php if ($parent_id == 14155) { ?>style="background-color: #666666; color: #fff;" <?php } ?>>Music for Approval</a>
+          <a href="<?php echo site_url(); ?>admin_categories/admin_s_d" <?php  
+            if(count($music_apprval)==0){?>
+            style="background-color: #666666; color: #fff;" 
+            
+            <?php }elseif ($parent_id != 14155 || (count($music_apprval)>0 && $parent_id == 14155)){ ?>
+              style="background-color:rgb(243, 62, 62) !important; color: #fff !important;" 
+
+           <?php }
+             ?>>Music for Approval</a>
           <!--<a href="<?php echo site_url(); ?>admin/approve_music" >Music for Approval</a>-->
 
 
@@ -1035,7 +1053,7 @@ if (!in_array($parent_id, $_SESSION['destination_ids'])) {
 
   }
 
-  
+
 
   function ajax_root_folder_index(parent_id, cate_type, alphaSearch_keyword, redirect_type, parent_url) {
 
@@ -1407,15 +1425,16 @@ if (!in_array($parent_id, $_SESSION['destination_ids'])) {
       },
       success: function(html) {
         //  alert(html)
-          if (html.includes("error pages")) {
-              // Handle error (you can return or alert the user, or perform any other action)
-              $('#file_div_id_' + id).hide();
-              $('#header_row_' + id).hide();
-          } else {
-              // Update the HTML content if no error
-              $('#file_detail_span' + id).html(html);
-          }
-       // $('#file_detail_span' + id).html(html);
+        if (html.includes("error pages")) {
+          $('#header_row_' + id).hide();
+          // Handle error (you can return or alert the user, or perform any other action)
+          $('#file_div_id_' + id).hide();
+
+        } else {
+          // Update the HTML content if no error
+          $('#file_detail_span' + id).html(html);
+        }
+        // $('#file_detail_span' + id).html(html);
       }
     });
   }
@@ -1485,7 +1504,7 @@ if (!in_array($parent_id, $_SESSION['destination_ids'])) {
         ids.push($(this).val());
       }
     });
-    
+
     if (flag > 0) {
       if (flag == 1) {
         alert("Check box to move multiple folders then select move button on top.");
